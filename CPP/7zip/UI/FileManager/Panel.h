@@ -322,6 +322,7 @@ public:
   // CMyComboBox _headerComboBox;
   CMyComboBoxEdit _comboBoxEdit;
   CMyListView _listView;
+  bool _thereAre_ListView_Items;
   NWindows::NControl::CStatusBar _statusBar;
   bool _lastFocusedIsList;
   // NWindows::NControl::CStatusBar _statusBar2;
@@ -338,6 +339,18 @@ public:
   CSelectedState _selectedState;
   bool _thereAreDeletedItems;
   bool _markDeletedItems;
+
+  void DeleteListItems()
+  {
+    if (_thereAre_ListView_Items)
+    {
+      bool b = _enableItemChangeNotify;
+      _enableItemChangeNotify = false;
+      _listView.DeleteAllItems();
+      _thereAre_ListView_Items = false;
+      _enableItemChangeNotify = b;
+    }
+  }
 
   HWND GetParent();
 
@@ -459,6 +472,7 @@ public:
       _flatMode(false),
       _flatModeForDisk(false),
       _flatModeForArc(false),
+      _thereAre_ListView_Items(false),
 
       // _showNtfsStrems_Mode(false),
       // _showNtfsStrems_ModeForDisk(false),
