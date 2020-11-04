@@ -26,8 +26,6 @@
 
 #include "../../MyVersion.h"
 
-#include "../../../../C/DllSecur.h"
-
 using namespace NWindows;
 using namespace NFile;
 // FIXME using namespace NDir;
@@ -245,11 +243,6 @@ int Main2(
   #endif
 )
 {
-  #ifdef _WIN32
-  // do we need load Security DLLs for console program?
-  LoadSecurityDlls();
-  #endif
-
   #if defined(_WIN32) && !defined(UNDER_CE)
   SetFileApisToOEM();
   #endif
