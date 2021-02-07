@@ -19,7 +19,7 @@ jobs:
       run: |
         echo "Updating and installing system packages..."
         sudo -E apt-get update
-        sudo -E apt-get -y install doxygen graphviz
+        sudo -E apt-get -y install doxygen graphviz zstd
 
     - name: Build docs
       run: |
@@ -28,7 +28,7 @@ jobs:
 
     - name: Tar docs
       run: |
-        tar -c --zstd -f doxygen_output.tar.zst doxygen_output
+        sh -c 'tar -c -f - doxygen_output | zstdmt > doxygen_output.tar.zst'
 
     - name : Upload artifact
       uses: actions/upload-artifact@master
