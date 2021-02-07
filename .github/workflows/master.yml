@@ -19,7 +19,7 @@ jobs:
       run: |
         echo "Updating and installing system packages..."
         sudo -E apt-get update
-        sudo -E apt-get -y install doxygen
+        sudo -E apt-get -y install doxygen graphviz
 
     - name: Build docs
       run: |
