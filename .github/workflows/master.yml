@@ -10,7 +10,7 @@ jobs:
     - name: Checkout main source code
       uses: actions/checkout@v2
       with:
-        ref: master
+        ref: ci
         fetch-depth: 0
 
     - name: Build environment initialization
@@ -21,7 +21,7 @@ jobs:
         sudo -E apt-get update
         sudo -E apt-get -y install doxygen
 
-    - name: Update & Install feeds
+    - name: Build docs
       run: |
         mkdir doxygen_output
         doxygen
