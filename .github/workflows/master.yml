@@ -1,0 +1,33 @@
+name: Build_Ubuntu_x86-64
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout main source code
+      uses: actions/checkout@v2
+      with:
+        ref: master
+        fetch-depth: 0
+
+    - name: Build environment initialization
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        echo "Updating and installing system packages..."
+        sudo -E apt-get update
+        sudo -E apt-get -y install doxygen
+
+    - name: Update & Install feeds
+      run: |
+        mkdir doxygen_output
+        doxygen
+
+    - name : Upload artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: Docs
+        path: doxygen_output
