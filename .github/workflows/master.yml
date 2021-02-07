@@ -26,8 +26,12 @@ jobs:
         mkdir doxygen_output
         doxygen
 
+    - name: Tar docs
+      run: |
+        tar -c --zstd -f doxygen_output.tar.zst doxygen_output
+
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
         name: Docs
-        path: doxygen_output
+        path: doxygen_output.tar.zst
